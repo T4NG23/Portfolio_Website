@@ -334,9 +334,9 @@ export default function Home() {
             <h2 className="text-xl pt-10 font-semibold">About Me</h2>
             <div className="border rounded-2xl p-4 bg-white dark:bg-card my-4">
               <p className="text-muted-foreground text-sm leading-relaxed">
-                I'm a Junior at Lehigh University studying under the interdisciplinary Computer Science and Business Honors Program. 
-                I'm also a research lead at Bina Labs, where I work on cutting-edge computer vision and machine learning projects. 
-                A fun fact about me: I've been playing the cello for over 10 years!
+                I&apos;m a Junior at Lehigh University studying under the interdisciplinary Computer Science and Business Honors Program. 
+                I&apos;m also a research lead at Bina Labs, where I work on cutting-edge computer vision and machine learning projects. 
+                A fun fact about me: I&apos;ve been playing the cello for over 10 years!
               </p>
             </div>
           </Element>
