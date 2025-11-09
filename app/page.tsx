@@ -51,6 +51,7 @@ const experience = [
     description: "City of Norwalk Comptroller's Office",
     date: "06/2025 - 08/2025",
     image: "/images/Norwalk Logo.jpg",
+    skills: ["T-SQL", "Excel", "UKG/NovaTime", "ERP Systems", "GASB Compliance"],
     details: [
       "Automated IRS Form 941 Schedule B with T-SQL, joining and validating ERP data to reduce reconciliation time by 90%",
       "Validated FY26 Budget Book and FY25 Fixed Assets datasets under GASB compliance, increasing data reliability",
@@ -62,6 +63,7 @@ const experience = [
     description: "RevSend (El Segundo, California - Remote)",
     date: "01/2025 - 05/2025",
     image: "/images/Revsend Logo.png",
+    skills: ["React", "JavaScript", "LinkedIn API", "AI/ML", "Node.js", "UI/UX"],
     details: [
       "Built and deployed an AI-driven gifting recommendation engine using LinkedIn data; improved feature adoption by 75%",
       "Created internal automation tools for feedback integration and content delivery, reducing manual QA cycles",
@@ -73,6 +75,7 @@ const experience = [
     description: "CaiXiaoMi",
     date: "08/2023",
     image: "/images/CaiXiaoMi.png",
+    skills: ["Python", "Web Development", "Data Analysis"],
     details: [
       "Contributed to the development of a web-based reporting platform using Python",
       "Collaborated with the Production team to enhance software capabilities for local farmer-consumer connections",
@@ -87,6 +90,7 @@ const researchExperience = [
     description: "Lehigh University Bina Lab",
     date: "11/2024 - Present",
     image: "/images/Bina Labs Logo.jpg",
+    skills: ["Python", "Deep Learning", "Computer Vision", "Detectron2", "PyTorch", "Machine Learning"],
     details: [
       "Co-authored an IEEE paper accepted for IGARSS 2025 on UAV-based hurricane damage detection using deep learning",
       "Designed ML pipelines processing 40,000+ UAV frames using Detectron2, DVIS++, and TMaNNet, improving segmentation accuracy over baseline CNNs",
@@ -147,6 +151,8 @@ export default function Home() {
 
   const [isHidden, setIsHidden] = useState(false);
   const [expandedProject, setExpandedProject] = useState<string | null>(null);
+  const [expandedWork, setExpandedWork] = useState<string | null>(null);
+  const [expandedResearch, setExpandedResearch] = useState<string | null>(null);
   const { scrollY } = useScroll();
   const lastYRef = useRef(0);
 
@@ -357,6 +363,7 @@ export default function Home() {
                           <h2 className="text-md font-semibold">
                             {project.title}
                           </h2>
+                          <span className="text-muted-foreground text-lg">...</span>
                           {project.github && (
                             <a
                               href={project.github}
@@ -412,50 +419,79 @@ export default function Home() {
           
           >
             <h2 className="text-xl pt-10 font-semibold">Work Experience</h2>
-            {experience.map((item) => (
-              <div key={item.title} className="my-4">
-                <div
-                  className="
-               border rounded-2xl p-4
-              bg-white dark:bg-card
-              "
+            <div className="mt-5 space-y-4">
+              {experience.map((item, index) => (
+                <motion.div
+                  key={`${item.title}-${index}`}
+                  className="border rounded-2xl p-4 bg-white dark:bg-card cursor-pointer hover:shadow-lg transition-shadow"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setExpandedWork(expandedWork === item.title ? null : item.title);
+                  }}
+                  initial={false}
+                  animate={{ height: "auto" }}
                 >
-                  <div className="md:flex justify-between items-start mb-3">
-                    <div className="flex items-center gap-x-4">
-                      <Image
-                        src={item.image}
-                        alt={item.title}
-                        width={100}
-                        height={100}
-                        className="rounded-md w-20 p-2"
-                      />
-
-                      <div className="">
-                        <h2 className="text-md font-semibold mt-4 md:mt-0">
-                          {item.title}
-                        </h2>
-                        <p className="text-muted-foreground">
-                          {item.description}
+                  <div className="md:flex items-center gap-x-4">
+                    <Image
+                      src={item.image}
+                      alt={item.title}
+                      width={100}
+                      height={100}
+                      className="rounded-md w-16 h-16 flex-shrink-0 p-2"
+                    />
+                    
+                    <div className="flex flex-col flex-1">
+                      <div className="flex items-center justify-between mb-2">
+                        <div className="flex items-center gap-3">
+                          <h2 className="text-md font-semibold">
+                            {item.title}
+                          </h2>
+                          <span className="text-muted-foreground text-lg">...</span>
+                        </div>
+                        <p className="text-muted-foreground text-sm">
+                          {item.date}
                         </p>
                       </div>
-                    </div>
-
-                    <div>
-                      <div className="text-muted-foreground text-sm mt-4 md:mt-0">
-                        {item.date}
-                      </div>
+                      
+                      <p className="text-muted-foreground text-sm mb-2">
+                        {item.description}
+                      </p>
+                      
+                      {item.skills && (
+                        <div className="flex flex-wrap gap-2">
+                          {item.skills.map((skill, skillIndex) => (
+                            <span
+                              key={skillIndex}
+                              className="px-2 py-1 text-xs bg-gray-100 dark:bg-gray-800 rounded-md text-muted-foreground"
+                            >
+                              {skill}
+                            </span>
+                          ))}
+                        </div>
+                      )}
                     </div>
                   </div>
-                  {item.details && (
-                    <ul className="list-disc list-inside space-y-1 ml-24 text-sm text-muted-foreground">
-                      {item.details.map((detail, index) => (
-                        <li key={index}>{detail}</li>
-                      ))}
-                    </ul>
+                  
+                  {expandedWork === item.title && (
+                    <motion.div
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: "auto" }}
+                      exit={{ opacity: 0, height: 0 }}
+                      transition={{ duration: 0.3 }}
+                      className="mt-4 pt-4 border-t border-border"
+                    >
+                      {item.details && (
+                        <ul className="list-disc list-inside space-y-1 text-sm text-muted-foreground">
+                          {item.details.map((detail, index) => (
+                            <li key={index}>{detail}</li>
+                          ))}
+                        </ul>
+                      )}
+                    </motion.div>
                   )}
-                </div>
-              </div>
-            ))}
+                </motion.div>
+              ))}
+            </div>
           </Element>
 
 
@@ -463,47 +499,79 @@ export default function Home() {
           name="research"
           >
             <h2 className="text-xl pt-10 font-semibold">Research Experience</h2>
-            {researchExperience.map((item) => (
-              <div key={item.title} className="my-4">
-                <div
-                  className="border rounded-2xl p-4 bg-white dark:bg-card"
+            <div className="mt-5 space-y-4">
+              {researchExperience.map((item, index) => (
+                <motion.div
+                  key={`${item.title}-${index}`}
+                  className="border rounded-2xl p-4 bg-white dark:bg-card cursor-pointer hover:shadow-lg transition-shadow"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setExpandedResearch(expandedResearch === item.title ? null : item.title);
+                  }}
+                  initial={false}
+                  animate={{ height: "auto" }}
                 >
-                  <div className="md:flex justify-between items-start mb-3">
-                    <div className="flex items-center gap-x-4">
-                      <Image
-                        src={item.image}
-                        alt={item.title}
-                        width={60}
-                        height={60}
-                        className="rounded-md w-12 h-12 object-contain"
-                      />
-
-                      <div className="">
-                        <h2 className="text-md font-semibold mt-4 md:mt-0">
-                          {item.title}
-                        </h2>
-                        <p className="text-muted-foreground">
-                          {item.description}
+                  <div className="md:flex items-center gap-x-4">
+                    <Image
+                      src={item.image}
+                      alt={item.title}
+                      width={60}
+                      height={60}
+                      className="rounded-md w-16 h-16 flex-shrink-0 object-contain"
+                    />
+                    
+                    <div className="flex flex-col flex-1">
+                      <div className="flex items-center justify-between mb-2">
+                        <div className="flex items-center gap-3">
+                          <h2 className="text-md font-semibold">
+                            {item.title}
+                          </h2>
+                          <span className="text-muted-foreground text-lg">...</span>
+                        </div>
+                        <p className="text-muted-foreground text-sm">
+                          {item.date}
                         </p>
                       </div>
-                    </div>
-
-                    <div>
-                      <div className="text-muted-foreground text-sm mt-4 md:mt-0">
-                        {item.date}
-                      </div>
+                      
+                      <p className="text-muted-foreground text-sm mb-2">
+                        {item.description}
+                      </p>
+                      
+                      {item.skills && (
+                        <div className="flex flex-wrap gap-2">
+                          {item.skills.map((skill, skillIndex) => (
+                            <span
+                              key={skillIndex}
+                              className="px-2 py-1 text-xs bg-gray-100 dark:bg-gray-800 rounded-md text-muted-foreground"
+                            >
+                              {skill}
+                            </span>
+                          ))}
+                        </div>
+                      )}
                     </div>
                   </div>
-                  {item.details && (
-                    <ul className="list-disc list-inside space-y-1 ml-24 text-sm text-muted-foreground">
-                      {item.details.map((detail, index) => (
-                        <li key={index}>{detail}</li>
-                      ))}
-                    </ul>
+                  
+                  {expandedResearch === item.title && (
+                    <motion.div
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: "auto" }}
+                      exit={{ opacity: 0, height: 0 }}
+                      transition={{ duration: 0.3 }}
+                      className="mt-4 pt-4 border-t border-border"
+                    >
+                      {item.details && (
+                        <ul className="list-disc list-inside space-y-1 text-sm text-muted-foreground">
+                          {item.details.map((detail, index) => (
+                            <li key={index}>{detail}</li>
+                          ))}
+                        </ul>
+                      )}
+                    </motion.div>
                   )}
-                </div>
-              </div>
-            ))}
+                </motion.div>
+              ))}
+            </div>
           </Element>
 
           <Element
