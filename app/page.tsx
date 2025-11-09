@@ -103,6 +103,18 @@ const leadership = [
     image: "/images/Eagle Scout Logo.jpg",
     details: []
   },
+  {
+    title: "AI Research Chair",
+    description: "Lehigh AI - Executive Board Member",
+    image: "/images/lehighAI.jpg",
+    details: []
+  },
+  {
+    title: "Secretary",
+    description: "Lehigh Blockchain Club - Executive Board Member",
+    image: "/images/lehighblockchain.jpg",
+    details: []
+  },
 ];
 
 const navbar = [
