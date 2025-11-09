@@ -30,7 +30,7 @@ const projects = [
   },
   {
     title: "LexiLens",
-    description: "Google Hack for Justice Winner - Awarded 'Most Likely to Be Venture Capital Funded'. A web platform that helps immigrants navigate complex legal documents by providing simplified translations in their preferred language and an AI-powered chatbot for assistance. Users can upload legal documents, store them in a personal project list, and receive simplified translations to make legal forms more accessible for non-native English speakers. The AI doesn&apos;t just translate—it also guides users on how to fill out forms, what information to put into specific lines, and where they&apos;re likely to find that information. Developed backend with FastAPI + SQLAlchemy; deployed on Google Cloud Compute, Cloud SQL, and Cloud Storage. Integrated OpenAI GPT-01 for NLU-based bias detection and context analysis.",
+    description: "Google Hack for Justice Winner - Awarded 'Most Likely to Be Venture Capital Funded'. A web platform that helps immigrants navigate complex legal documents by providing simplified translations in their preferred language and an AI-powered chatbot for assistance. Users can upload legal documents, store them in a personal project list, and receive simplified translations to make legal forms more accessible for non-native English speakers. The AI does not just translate—it also guides users on how to fill out forms, what information to put into specific lines, and where they&apos;re likely to find that information. Developed backend with FastAPI + SQLAlchemy; deployed on Google Cloud Compute, Cloud SQL, and Cloud Storage. Integrated OpenAI GPT-01 for NLU-based bias detection and context analysis.",
     date: "03/2025",
     image: "/images/Lexilens.png",
     github: "https://github.com/T4NG23/Nautica-Hackathon25-Win-",
@@ -298,7 +298,7 @@ export default function Home() {
                 </motion.div>
                 <h1 className="text-xl lg:text-4xl font-semibold">
                   <Typewriter
-                    words={["Hi, I&apos;m William Hudson Tang! Welcome to my portfolio!"]}
+                    words={["Hi, I am William Hudson Tang! Welcome to my portfolio!"]}
                     cursor
                   />
                 </h1>
